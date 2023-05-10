@@ -6,41 +6,34 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			name: 'thomas',
-			names: ['thomas', 'jose'],
-			whichName: false,
+			monsters: [],
 		};
-		this.handleButtonClick = this.handleButtonClick.bind(this);
+		this.url = 'https://jsonplaceholder.typicode.com/users';
+	}
+	componentDidMount() {
+		// this method is called in the first time the component is rendered
+		fetch(this.url)
+			.then((response) => response.json())
+			.then((users) =>
+				this.setState(
+					() => {
+						return {
+							monsters: users,
+						};
+					},
+					() => console.log(this.state)
+				)
+			);
 	}
 	render() {
 		return (
 			<div className="App">
-				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<p>Hi {this.state.name}</p>
-					<button
-						onClick={(props, state) =>
-							this.handleButtonClick(state, props)
-						}
-					>
-						Change name
-					</button>
-				</header>
+				{this.state.monsters.map((m) => (
+					<h1 key={m.id}>{m.name}</h1>
+				))}
 			</div>
 		);
 	}
-	handleButtonClick(state, props) {
-		this.setState(
-			(state, props) => {
-				return {
-					whichName: state.whichName ^ true,
-					name: state.names[state.whichName],
-				};
-			},
-			() => {
-				console.log(this.state);
-			}
-		);
-	}
 }
+
 export default App;
