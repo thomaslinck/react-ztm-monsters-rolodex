@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import './App.css';
+import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
 
 class App extends Component {
 	constructor() {
@@ -31,6 +33,7 @@ class App extends Component {
 	}
 
 	onSearchBoxChange = (event) => {
+		// by using () => {} syntax, this is automatically binded to the method.
 		this.setState({
 			searchField: event.target.value.toLowerCase(),
 		});
@@ -40,23 +43,21 @@ class App extends Component {
 		return monster.name.toLowerCase().includes(this.state.searchField);
 	};
 
-	createMonsterTag(monster) {
-		return <h1 key={monster.id}>{monster.name}</h1>;
-	}
 	render() {
 		const { monsters } = this.state;
 
 		return (
 			<div className="App">
-				<input
+				<SearchBox
 					className="search-box"
-					type="search"
 					placeholder="search monsters"
-					onChange={this.onSearchBoxChange}
+					onChangeHandler={this.onSearchBoxChange}
 				/>
-				{monsters
-					.filter(this.byMonsterThatIncludeSearchText)
-					.map(this.createMonsterTag)}
+				<CardList
+					monsters={monsters.filter(
+						this.byMonsterThatIncludeSearchText
+					)}
+				/>
 			</div>
 		);
 	}
