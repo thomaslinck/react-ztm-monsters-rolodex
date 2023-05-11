@@ -45,18 +45,19 @@ class App extends Component {
 
 	render() {
 		const { monsters } = this.state;
+		const byMonsterThatIncludeSearchText =
+			this.byMonsterThatIncludeSearchText;
 
 		return (
 			<div className="App">
+				<h1 className="app-title">Monsters Rolodex</h1>
 				<SearchBox
 					className="monster-search-box"
 					placeholder="search monsters"
 					onChangeHandler={this.onSearchBoxChange}
 				/>
 				<CardList
-					monsters={monsters.filter(
-						this.byMonsterThatIncludeSearchText
-					)}
+					monsters={monsters.filter(byMonsterThatIncludeSearchText)}
 				/>
 			</div>
 		);
