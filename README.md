@@ -1,3 +1,4 @@
 # React: zero to mastery
 
-Following [this](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/) course 
+Monsters Rolodex simple react website following [this](https://www.udemy.com/course/complete-react-developer-zero-to-mastery/) course. 
+
